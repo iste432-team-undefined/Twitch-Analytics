@@ -12,7 +12,7 @@ const pool = new Pool({
 function testConn() {
   const query = {
       // give the query a unique name
-      name: 'get-user',
+      name: 'get-username',
       text: format('SELECT username FROM "user" WHERE id_user = $1'),
       values: [1],
       }
@@ -29,7 +29,7 @@ function testConn() {
 
 function getUser(id){
 	const userQuery = {
-		name: 'get-name',
+		name: 'get-user',
 		text: format('SELECT * from "user" WHERE id_user = $1'),
 		values:[id],
 	}
@@ -99,7 +99,7 @@ function getDashboardViewIds(did) {
 	const dashQuery = {
 		name: 'get-dash-views',
 		text: format('SELECT * FROM dashboard_view WHERE id_dashboard=$1'),
-		values:[uid],
+		values:[did],
 	}
 
 	return new Promise( (resolve, reject) => {
@@ -129,26 +129,41 @@ function createDashboard(name,ownerID){
 	});
 }
 
-function test() {
-	testConn().then( (res) => {
-		console.log(res[0]) ;
-	}).catch( (err) => setImmediate(() => { throw err; }));
+async function test() {
+	// testConn().then( (res) => {
+	// 	console.log(res[0]) ;
+	// }).catch( (err) => setImmediate(() => { throw err; }));
 
-	getUser(1).then( (res) => {
-		console.log(res[0]);
+	// getUser(1).then( (res) => {
+	// 	console.log(res[0]);
+	// }).catch( (err) => setImmediate(() => {throw err; }));
+
+	// getDashboardName(1).then( (res) => {
+	// 	console.log(res[0]);
+	// }).catch( (err) => setImmediate(() => {throw err;}));
+
+	// createDashboard("test",2).then( (res) => {
+	// 	console.log(res.id_dashboard) ;
+	// }).catch( (err) => setImmediate(() => {throw err; }));
+
+	// getDashboardName(3).then( (res) => {
+	// 	console.log(res[0]);
+	// }).catch( (err) => setImmediate(() => {throw err;}));
+
+	getUserDashboardIds(1).then( (res) => {
+		res.forEach(elementx => {
+			console.log(elementx);
+			getDashboardViewIds(elementx.id_dashboard).then( (res) => {
+				res.forEach(elementy => {
+					console.log(elementy)
+					getView(elementy.id_view).then((res) => {
+						console.log(res);
+					}).catch( (err) => setImmediate(() => {throw err;}) );
+				});
+			}).catch( (err) => setImmediate(() => {throw err;}) );
+		});
 	}).catch( (err) => setImmediate(() => {throw err; }));
 
-	getDashboardName(1).then( (res) => {
-		console.log(res[0]);
-	}).catch( (err) => setImmediate(() => {throw err;}));
-
-	createDashboard("test",2).then( (res) => {
-		console.log(res.id_dashboard) ;
-	}).catch( (err) => setImmediate(() => {throw err; }));
-
-	getDashboardName(3).then( (res) => {
-		console.log(res[0]);
-	}).catch( (err) => setImmediate(() => {throw err;}));
 }
 
 // test();
@@ -156,6 +171,9 @@ function test() {
 module.exports = {
   testConn,
   getUser,
-  getDashboardName,
-  createDashboard
+  getDashboard,
+  createDashboard,
+  getDashboardViewIds,
+  getUserDashboardIds,
+  getView
 }
