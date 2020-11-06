@@ -1,19 +1,29 @@
 {
-  "name": "Twitch-Analytics",
+  "name": "twitch-analytics",
   "version": "1.0.0",
-  "description": "",
+  "description": "Class project that utilizes the [Twitch API](https://dev.twitch.tv/docs/api) to provide users statistics on various streamers and categories",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "directories": {
+    "test": "test"
   },
-  "keywords": [],
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iste432-team-undefined/Twitch-Analytics.git"
+  },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iste432-team-undefined/Twitch-Analytics/issues"
+  },
+  "homepage": "https://github.com/iste432-team-undefined/Twitch-Analytics#readme",
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.0",
     "express": "^4.17.1",
     "mocha": "^8.2.1",
-    "pg": "^8.4.1",
+    "pg": "^8.4.2",
     "pg-format": "^1.0.4"
   }
 }
