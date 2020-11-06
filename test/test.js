@@ -12,14 +12,35 @@ describe('Database', function() {
   describe('#getUser(1)', function() {
     it('Should return the name of user id 1 ', async function() {
         const data = await DBconn.getUser(1);
-        assert.strictEqual(data[0].username, "test1");
+        assert.strictEqual(data[0].id_user, 1);
     });
   });
 
-  describe('#getDashboardName(1)', function() {
-    it('Should return the title of dashboard id 1 ', async function() {
-        const data = await DBconn.getDashboardName(1);
-        assert.strictEqual(data[0].title, "StreamerName");
+  describe('#getDashboard(1)', function() {
+    it('Should return the dashboard of id 1 ', async function() {
+        const data = await DBconn.getDashboard(1);
+        assert.strictEqual(data[0].id_dashboard, 1);
+    });
+  });
+
+  describe('#getView(1)', function() {
+    it('Should return the view of id 1 ', async function() {
+        const data = await DBconn.getView(1);
+        assert.strictEqual(data[0].id_view, 1);
+    });
+  });
+
+  describe('#getUserDashboardIds(1)', function() {
+    it('Should return the dashboards for user with uid 1 ', async function() {
+        const data = await DBconn.getUserDashboardIds(1);
+        assert.strictEqual(data[0].id_dashboard, 1);
+    });
+  });
+
+  describe('#getDashboardViewIds(1)', function() {
+    it('Should return the views that relate to dashboard with id 1 ', async function() {
+        const data = await DBconn.getDashboardViewIds(1);
+        assert.strictEqual(data[0].id_view, 1);
     });
   });
 

@@ -150,6 +150,10 @@ async function test() {
 	// 	console.log(res[0]);
 	// }).catch( (err) => setImmediate(() => {throw err;}));
 
+	getUser(1).then( (res) => {
+		console.log(res);
+	}).catch( (err) => setImmediate(() => {throw err; }));
+
 	getUserDashboardIds(1).then( (res) => {
 		res.forEach(elementx => {
 			console.log(elementx);
@@ -166,7 +170,7 @@ async function test() {
 
 }
 
-// test();
+//test();
 
 module.exports = {
   testConn,
