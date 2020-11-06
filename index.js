@@ -22,7 +22,7 @@ function getTwitchRITClientAccessToken (callback) {
 
 function tokenRecieved(client_data) {
     console.log(client_data) ;
-    //testTwitchApi(client_data) ;
+    testTwitchApi(client_data) ;
     getUserToken(client_data.access_token, display);
 }
 

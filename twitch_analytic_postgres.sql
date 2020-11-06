@@ -52,7 +52,6 @@ INSERT INTO "user" (username,password,salt) VALUES ('test3','ttpd','sthere');
 INSERT INTO dashboard (title, owner_id) VALUES ('StreamerName', 2);
 INSERT INTO dashboard (title, owner_id) VALUES ('GameName', 1);
 
-
 INSERT INTO "view" (view_type,id_dashboard,content_id) VALUES (1,1,3125543);
 INSERT INTO "view" (view_type,id_dashboard,content_id) VALUES (2,1,4512354);
 

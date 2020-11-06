@@ -28,14 +28,14 @@ function testConn() {
 }
 
 function getUser(id){
-	const nameQuery = {
+	const userQuery = {
 		name: 'get-name',
-		text: format('SELECT username from "user" WHERE id_user = $1'),
+		text: format('SELECT * from "user" WHERE id_user = $1'),
 		values:[id],
 	}
 
 	return new Promise( (resolve, reject) => {
-		pool.query(nameQuery, (err, result) => {
+		pool.query(userQuery, (err, result) => {
 			if (err) {
 				return reject(err);
 			}
@@ -44,11 +44,62 @@ function getUser(id){
 	});
 }
 
-function getDashboardName(id){
+function getDashboard(id){
 	const dashQuery = {
 		name: 'get-dash',
-		text: format('SELECT title FROM dashboard WHERE id_dashboard=$1'),
+		text: format('SELECT * FROM dashboard WHERE id_dashboard=$1'),
 		values:[id],
+	}
+
+	return new Promise( (resolve, reject) => {
+		pool.query(dashQuery, (err,result) =>{
+			if(err){
+				return reject(err);
+			}
+				return resolve(result.rows);
+		});
+	});
+}
+
+function getView(id){
+	const viewQuery = {
+		name: 'get-view',
+		text: format('SELECT * FROM "view" WHERE id_view=$1'),
+		values:[id],
+	}
+
+	return new Promise( (resolve, reject) => {
+		pool.query(viewQuery, (err,result) =>{
+			if(err){
+				return reject(err);
+			}
+				return resolve(result.rows);
+		});
+	});
+}
+
+function getUserDashboardIds(uid){
+	const dashQuery = {
+		name: 'get-user-dash',
+		text: format('SELECT * FROM user_dashboard WHERE id_user=$1'),
+		values:[uid],
+	}
+
+	return new Promise( (resolve, reject) => {
+		pool.query(dashQuery, (err,result) =>{
+			if(err){
+				return reject(err);
+			}
+				return resolve(result.rows);
+		});
+	});
+}
+
+function getDashboardViewIds(did) {
+	const dashQuery = {
+		name: 'get-dash-views',
+		text: format('SELECT * FROM dashboard_view WHERE id_dashboard=$1'),
+		values:[uid],
 	}
 
 	return new Promise( (resolve, reject) => {
