@@ -28,9 +28,37 @@ async function getTwitchGame(token, gamename) {
         }
     }
 
-    let url = 'search/categories?query='+gamename ;
+    let url = 'games?name='+gamename ;
     
     return await makeGetRequest(url, config); 
+}
+
+
+async function getTwitchGameById(token, content_id) {
+    let config = {
+        headers: {
+            Authorization: 'Bearer '+ token,
+            'Client-Id': client_id
+        }
+    }
+
+    let url = 'games?id='+content_id ;
+
+    return await makeGetRequest(url, config) ;
+}
+
+
+async function getTwitchUserById(token, content_id) {
+    let config = {
+        headers: {
+            Authorization: 'Bearer '+ token,
+            'Client-Id': client_id
+        }
+    }
+
+    let url = 'users?id='+content_id ;
+
+    return await makeGetRequest(url, config) ;
 }
 
 
@@ -64,5 +92,7 @@ function getToken() {
 module.exports = {
     getToken,
     getTwitchUser,
-    getTwitchGame
+    getTwitchGame,
+    getTwitchGameById,
+    getTwitchUserById
 }

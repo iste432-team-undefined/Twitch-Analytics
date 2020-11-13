@@ -57,14 +57,14 @@ INSERT INTO dashboard (title, owner_id) VALUES ('Ninja', 2);
 INSERT INTO dashboard (title, owner_id) VALUES ('Escape from Tarkov', 3);
 INSERT INTO dashboard (title, owner_id) VALUES ('Call of Duty Warfare Warfare', 3);
 
-INSERT INTO "view" (view_type,id_dashboard,content_id) VALUES (1,3125543);
-INSERT INTO "view" (view_type,id_dashboard,content_id) VALUES (2,4512354);
-INSERT INTO "view" (view_type,id_dashboard,content_id) VALUES (2,4512354);
-INSERT INTO "view" (view_type,id_dashboard,content_id) VALUES (2,7512352);
-INSERT INTO "view" (view_type,id_dashboard,content_id) VALUES (2,9582657);
-INSERT INTO "view" (view_type,id_dashboard,content_id) VALUES (1,19571641);
-INSERT INTO "view" (view_type,id_dashboard,content_id) VALUES (2,8352554);
-INSERT INTO "view" (view_type,id_dashboard,content_id) VALUES (2,3522904);
+INSERT INTO "view" (view_type,content_id) VALUES (1,3125543);
+INSERT INTO "view" (view_type,content_id) VALUES (2,4512354);
+INSERT INTO "view" (view_type,content_id) VALUES (2,4512354);
+INSERT INTO "view" (view_type,content_id) VALUES (2,7512352);
+INSERT INTO "view" (view_type,content_id) VALUES (2,9582657);
+INSERT INTO "view" (view_type,content_id) VALUES (1,19571641);
+INSERT INTO "view" (view_type,content_id) VALUES (2,8352554);
+INSERT INTO "view" (view_type,content_id) VALUES (2,3522904);
 
 INSERT INTO dashboard_view (id_dashboard,id_view) VALUES (1, 1);
 INSERT INTO dashboard_view (id_dashboard,id_view) VALUES (2, 2);
