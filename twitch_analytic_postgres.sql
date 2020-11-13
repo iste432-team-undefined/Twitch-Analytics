@@ -23,13 +23,13 @@ DROP TABLE IF EXISTS "view";
 CREATE TABLE "view" (
 	id_view SERIAL,
 	view_type SMALLINT,
-	id_dashboard INT NOT NULL,
 	content_id INT NOT NULL,
 	PRIMARY KEY(id_view),
 	FOREIGN KEY (id_dashboard) REFERENCES dashboard (id_dashboard)
 );
 
 CREATE TABLE dashboard_view (
+	id_dashboard INT NOT NULL,
 	id_view INT NOT NULL,
 	PRIMARY KEY(id_dashboard, id_view),
 	FOREIGN KEY (id_dashboard) REFERENCES dashboard (id_dashboard),
