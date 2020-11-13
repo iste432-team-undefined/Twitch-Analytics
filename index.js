@@ -1,22 +1,19 @@
 const express = require('express') ;
 const twitch = require('./twitch_api') ;
+const DBconn = require('./db') ;
 
 var token = "";
 
 const app = new express();
 
-function display() {
-    app.get('/', async function(req, res) {
-        let twitch_user = "";
-        twitch_user = await twitch.getTwitchUser(token, "shroud") ;
+app.get('/', async function(req, res) {
+    let twitch_user = "";
+    twitch_user = await twitch.getTwitchUser(token, "shroud") ;
 
-        res.send(twitch_user.data) ;
-    });
-}
-
+    res.send(twitch_user.data) ;
+});
 
 app.listen(3000, async function() {
     console.log(`Example app listening at http://localhost:3000/`);
-    token = await twitch.getToken() ;
-    display() ;
+    token = await twitch.getToken() ; 
 });
