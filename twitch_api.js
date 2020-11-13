@@ -6,6 +6,49 @@ const grant_type = 'client_credentials' ;
 
 const twitch_api = 'https://api.twitch.tv/helix/' ;
 
+async function getTwitchUser(token, username) {
+    let config = {
+        headers: {
+            Authorization: 'Bearer '+ token,
+            'Client-Id': client_id
+        }
+    }
+
+    let url = 'users?login='+username ;
+
+    return await makeGetRequest(url, config); 
+}
+
+
+async function getTwitchGame(token, gamename) {
+    let config = {
+        headers: {
+            Authorization: 'Bearer '+ token,
+            'Client-Id': client_id
+        }
+    }
+
+    let url = 'search/categories?query='+gamename ;
+    
+    return await makeGetRequest(url, config); 
+}
+
+
+function makeGetRequest(url, config) {
+    return new Promise( (resolve, reject) =>{
+        axios
+            .get(twitch_api + url, config)
+                .then(res => {
+                    console.log(res.data);
+                    return resolve(res.data);
+                })
+                .catch(err => {
+                    console.log(err) ;
+                    return reject(err) ;
+                });
+    });
+}
+
 function getToken() {
     return new Promise( (resolve, reject) =>{
         axios
@@ -18,29 +61,8 @@ function getToken() {
     });
 }
 
-function getTwitchUser(token, username) {
-    let config = {
-        headers: {
-            Authorization: 'Bearer '+token,
-            'Client-Id': client_id
-        }
-    }
-
-    return new Promise( (resolve, reject) =>{
-        axios
-            .get(twitch_api+'users?login='+ username, config)
-                .then(res => {
-                    console.log(res.data);
-                    return resolve(res.data);
-                })
-                .catch(err => {
-                    console.log(err) ;
-                    return reject(err) ;
-                });
-    });
-}
-
 module.exports = {
     getToken,
-    getTwitchUser
+    getTwitchUser,
+    getTwitchGame
 }
