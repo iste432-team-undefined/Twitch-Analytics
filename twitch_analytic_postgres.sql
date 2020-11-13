@@ -14,9 +14,7 @@ DROP TABLE IF EXISTS dashboard;
 CREATE TABLE dashboard (
 	id_dashboard SERIAL,
 	title VARCHAR(45),
-	owner_id INT NOT NULL,
-	PRIMARY KEY(id_dashboard),
-	FOREIGN  KEY (owner_id) REFERENCES "user" (id_user)
+	PRIMARY KEY(id_dashboard)
 );
 
 DROP TABLE IF EXISTS "view";
@@ -24,8 +22,7 @@ CREATE TABLE "view" (
 	id_view SERIAL,
 	view_type SMALLINT,
 	content_id INT NOT NULL,
-	PRIMARY KEY(id_view),
-	FOREIGN KEY (id_dashboard) REFERENCES dashboard (id_dashboard)
+	PRIMARY KEY(id_view)
 );
 
 CREATE TABLE dashboard_view (
@@ -48,14 +45,14 @@ INSERT INTO "user" (username,password,salt) VALUES ('gamer_man1','testpwd','salt
 INSERT INTO "user" (username,password,salt) VALUES ('Xxx_gamer420_xxX','estpw','alhere');
 INSERT INTO "user" (username,password,salt) VALUES ('GgeZ','ttpd','sthere');
 
-INSERT INTO dashboard (title, owner_id) VALUES ('StreamerName', 2);
-INSERT INTO dashboard (title, owner_id) VALUES ('GameName', 1);
-INSERT INTO dashboard (title, owner_id) VALUES ('Minecraft ', 1);
-INSERT INTO dashboard (title, owner_id) VALUES ('League of Legends', 1);
-INSERT INTO dashboard (title, owner_id) VALUES ('Skate 4', 3);
-INSERT INTO dashboard (title, owner_id) VALUES ('Ninja', 2);
-INSERT INTO dashboard (title, owner_id) VALUES ('Escape from Tarkov', 3);
-INSERT INTO dashboard (title, owner_id) VALUES ('Call of Duty Warfare Warfare', 3);
+INSERT INTO dashboard (title) VALUES ('StreamerName');
+INSERT INTO dashboard (title) VALUES ('GameName');
+INSERT INTO dashboard (title) VALUES ('Minecraft');
+INSERT INTO dashboard (title) VALUES ('League of Legends');
+INSERT INTO dashboard (title) VALUES ('Skate 4');
+INSERT INTO dashboard (title) VALUES ('Ninja');
+INSERT INTO dashboard (title) VALUES ('Escape from Tarkov');
+INSERT INTO dashboard (title) VALUES ('Call of Duty Modern Warfare');
 
 INSERT INTO "view" (view_type,content_id) VALUES (1,3125543);
 INSERT INTO "view" (view_type,content_id) VALUES (2,4512354);
