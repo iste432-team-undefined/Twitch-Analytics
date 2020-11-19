@@ -80,7 +80,7 @@ function buildUser(uid, username) {
 
                     for(let x = 0; x < userData[i].views.length; x++) {
                         let newView = userData[i].views[x];
-                        view_set.push(new View(newView.view_type, newView.content_id));
+                        view_set.push(new View(newView.view_type, newView.content_id,newView.id_view));
                     }
 
                     dash_set.push(new Dashboard(userData[i].title, userData[i].id_dashboard, view_set));
@@ -103,9 +103,9 @@ async function test() {
     // let test_id = await createNewUser("test5","test1");
     // console.log(test_id) ; 
 
-    // let test_login = await loginUser("test5","test1")
-    // console.log(test_login) ;
-    // console.log(test_login.dashboards[0].views) ;
+    let test_login = await loginUser("test5","test1")
+    console.log(test_login) ;
+    console.log(test_login.dashboards[0].views) ;
 }
 
 // test().catch((err) => {
