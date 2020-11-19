@@ -1,7 +1,8 @@
 class View{
-    constructor(viewType,contentID){
+    constructor(viewType,contentID,viewID){
         this._viewType = viewType;
         this._contentID = contentID;
+        this._viewID = viewID;
     }
 
     get viewType(){
@@ -10,6 +11,10 @@ class View{
 
     get contentID(){
         return this._contentID;
+    }
+
+    get viewID(){
+        return this._viewID;
     }
 
 }
