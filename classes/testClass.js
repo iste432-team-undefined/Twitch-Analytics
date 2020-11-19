@@ -2,8 +2,6 @@ const User = require('./User.js');
 const Dashboard = require('./Dashboard.js');
 const View = require('./View.js');
 
-
-
 // Test Views
 let view1 = new View(1,1234);
 let view2 = new View(2,3321);
@@ -18,11 +16,10 @@ let setView = {view4,view5};
 let dash1 = new Dashboard('yessir',123,viewSet);
 let dash2 = new Dashboard('goodenough',432,setView);
 let dashCollection = {dash1,dash2};
+
 // Test User
-let testUser = new User('hahayes','41231',dashCollection);
+let testUser = new User(1,'hahayes',dashCollection);
 
-console.log(testUser.username);
+console.log("UserID: "+testUser.userID);
+console.log("Username: "+testUser.username);
 console.log(testUser.dashboards);
-// console.log(testDashboard.title());
-
-// console.log(testUser.userID);
