@@ -63,6 +63,9 @@ INSERT INTO "view" (view_type,content_id) VALUES (2,8352554);
 INSERT INTO "view" (view_type,content_id) VALUES (2,3522904);
 
 INSERT INTO dashboard_view (id_dashboard,id_view) VALUES (1, 1);
+INSERT INTO dashboard_view (id_dashboard,id_view) VALUES (1, 2);
+INSERT INTO dashboard_view (id_dashboard,id_view) VALUES (1, 3);
+INSERT INTO dashboard_view (id_dashboard,id_view) VALUES (1, 4);
 INSERT INTO dashboard_view (id_dashboard,id_view) VALUES (2, 2);
 INSERT INTO dashboard_view (id_dashboard,id_view) VALUES (3, 3);
 INSERT INTO dashboard_view (id_dashboard,id_view) VALUES (4, 4);

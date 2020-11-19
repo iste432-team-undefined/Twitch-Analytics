@@ -112,6 +112,7 @@ function getView(id){
 	});
 }
 
+
 function getUserDashboardIds(uid){
 	const dashQuery = {
 		name: 'get-user-dash',
@@ -163,6 +164,29 @@ function createDashboard(name,ownerID){
 	});
 }
 
+function getUserData(uid) {
+	const get_content_from_uid_query = {
+		name: 'user-get-content',
+		text: format("" +
+		"SELECT ud.id_user, d.*, json_agg(v) as views FROM user_dashboard ud " +
+		"INNER JOIN dashboard d on d.id_dashboard = ud.id_dashboard " +
+			"INNER JOIN dashboard_view dv on d.id_dashboard = dv.id_dashboard " +
+			"INNER JOIN view v on v.id_view = dv.id_view " +
+		"WHERE ud.id_user = $1 " +
+		"GROUP BY d.id_dashboard, ud.id_user"),
+		values: [uid],
+	}
+
+return new Promise( (resolve, reject) =>{
+	pool.query(get_content_from_uid_query, (err,result) => {
+		if (err) {
+			return reject(err);
+		}
+		return resolve(result.rows);
+	});
+});
+}
+
 async function test() {
 	// testConn().then( (res) => {
 	// 	console.log(res[0]) ;
@@ -202,12 +226,15 @@ async function test() {
 	// 	});
 	// }).catch( (err) => setImmediate(() => {throw err; }));
 
-	let newId = await createUser("testets", "hkjashkjsafbkj");
-	console.log(newId[0].id_user) ;
+	// let newId = await createUser("testets", "hkjashkjsafbkj");
+	// console.log(newId[0].id_user) ;
 
+	let data = await getUserContent(2);
+	console.log(data) ;
+	console.log(data[1].views);
 }
 
-// test();
+test();
 
 module.exports = {
   testConn,
@@ -218,5 +245,6 @@ module.exports = {
   getUserDashboardIds,
   getView,
   createUser,
-  getUserByName
+  getUserByName,
+  getUserContent
 }
