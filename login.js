@@ -54,3 +54,8 @@ async function test() {
 }
 
 // test();
+
+module.exports = {
+    createNewUser,
+    loginUser
+}
