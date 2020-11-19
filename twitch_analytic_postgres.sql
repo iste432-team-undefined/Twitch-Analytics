@@ -5,7 +5,11 @@ DROP TABLE IF EXISTS "user" ;
 CREATE TABLE "user" (
 	id_user SERIAL,
 	username VARCHAR(45),
+<<<<<<< HEAD
 	password VARCHAR(100),
+=======
+	password VARCHAR(50),
+>>>>>>> origin/ken_branch
 	PRIMARY KEY(id_user)
 );
 
