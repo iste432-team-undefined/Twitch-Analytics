@@ -23,3 +23,9 @@ let testUser = new User(1,'hahayes',dashCollection);
 console.log("UserID: "+testUser.userID);
 console.log("Username: "+testUser.username);
 console.log(testUser.dashboards);
+console.log(' ');
+
+// JSON Example of user object
+console.log('JSON Output Example');
+console.log('===================');
+console.log(JSON.stringify(testUser));
