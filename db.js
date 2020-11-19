@@ -112,7 +112,6 @@ function getView(id){
 	});
 }
 
-
 function getUserDashboardIds(uid){
 	const dashQuery = {
 		name: 'get-user-dash',
