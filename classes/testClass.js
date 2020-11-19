@@ -3,13 +3,14 @@ const Dashboard = require('./Dashboard.js');
 const View = require('./View.js');
 
 // Test Views
-let view1 = new View(1,1234);
-let view2 = new View(2,3321);
-let view3 = new View(1,4321);
+let view1 = new View(1,1234,11);
+let view2 = new View(2,3321,22);
+let view3 = new View(1,4321,33);
 let viewSet = {view1,view2,view3};
+console.log(viewSet);
 
-let view4 = new View(1,324);
-let view5 = new View(2,314);
+let view4 = new View(1,324,44);
+let view5 = new View(2,314,55);
 let setView = {view4,view5};
 
 // Test Dashboards
@@ -24,6 +25,7 @@ console.log("UserID: "+testUser.userID);
 console.log("Username: "+testUser.username);
 console.log(testUser.dashboards);
 console.log(' ');
+testUser
 
 // JSON Example of user object
 console.log('JSON Output Example');
