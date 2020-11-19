@@ -31,7 +31,7 @@ function createNewUser(username, password) {
                 }
         }
         else {
-            reject(-1) ;
+            reject(null) ;
         }
     });
 }
@@ -42,23 +42,28 @@ function loginUser(username, password) {
 
         userCheck = await dbconn.getUserByName(username);
 
-        bcrypt.compare(password, userCheck.password, function (err, result) {
-            if(err) {
-                reject(err) ;
-            }
+        if(!userCheck) {
+            reject(null) ;
+        }
+        else {
+            bcrypt.compare(password, userCheck.password, function (err, result) {
+                if(err) {
+                    reject(err) ;
+                }
 
-            if (result == true) {
-                let rtnUser = buildUser(userCheck.id_user,username);
-                if(rtnUser){
-                    resolve(rtnUser);
+                if (result == true) {
+                    let rtnUser = buildUser(userCheck.id_user,username);
+                    if(rtnUser){
+                        resolve(rtnUser);
+                    }
+                    else {
+                        reject(null) ;
+                    }
+                } else {
+                    resolve(null) ;
                 }
-                else {
-                    reject(null) ;
-                }
-            } else {
-                resolve(-1) ;
-            }
-        });
+            });
+        }
     });
 }
 
@@ -98,12 +103,15 @@ async function test() {
     // let test_id = await createNewUser("test5","test1");
     // console.log(test_id) ; 
 
-    let test_login = await loginUser("test5","test1") ;
-    console.log(test_login) ;
-    console.log(test_login.dashboards[0].views) ;
+    // let test_login = await loginUser("test5","test1")
+    // console.log(test_login) ;
+    // console.log(test_login.dashboards[0].views) ;
 }
 
-test();
+// test().catch((err) => {
+//     console.log("user does not exist or cannot create user");
+//     console.log(err);
+// });
 
 module.exports = {
     createNewUser,

@@ -253,7 +253,7 @@ async function test() {
 	// console.log(data[1].views);
 }
 
-test();
+// test();
 
 module.exports = {
   testConn,
