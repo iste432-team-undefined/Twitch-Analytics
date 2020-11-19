@@ -19,8 +19,9 @@ let dash1 = new Dashboard('yessir',123,viewSet);
 let dash2 = new Dashboard('goodenough',432,setView);
 let dashCollection = {dash1,dash2};
 // Test User
-let testUser = new User('hahayes','41231',dashCollection);
+let testUser = new User(1,'hahayes','41231',dashCollection);
 
+console.log(testUser.userID);
 console.log(testUser.username);
 console.log(testUser.dashboards);
 // console.log(testDashboard.title());
