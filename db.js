@@ -27,6 +27,40 @@ function testConn() {
   });
 }
 
+function createUser(username, password) {
+	const userQuery = {
+		name: 'create-user',
+		text: format('INSERT INTO "user" (username, password) VALUES($1, $2) RETURNING id_user'),
+		values:[username,password],
+	}
+
+	return new Promise( (resolve, reject) => {
+		pool.query(userQuery, (err, result) => {
+			if (err) {
+				return reject(-1);
+			}
+			return resolve(result.rows);
+		});
+	});
+}
+
+function getUserByName(username) {
+	const userQuery = {
+		name: 'get-username',
+		text: format('SELECT * FROM "user" WHERE username = $1'),
+		values:[username],
+	}
+
+	return new Promise( (resolve, reject) => {
+		pool.query(userQuery, (err, result) => {
+			if (err) {
+				return reject(err);
+			}
+			return resolve(result.rows[0]);
+		});
+	});
+}
+
 function getUser(id){
 	const userQuery = {
 		name: 'get-user',
@@ -150,27 +184,30 @@ async function test() {
 	// 	console.log(res[0]);
 	// }).catch( (err) => setImmediate(() => {throw err;}));
 
-	getUser(1).then( (res) => {
-		console.log(res);
-	}).catch( (err) => setImmediate(() => {throw err; }));
+	// getUser(1).then( (res) => {
+	// 	console.log(res);
+	// }).catch( (err) => setImmediate(() => {throw err; }));
 
-	getUserDashboardIds(1).then( (res) => {
-		res.forEach(elementx => {
-			console.log(elementx);
-			getDashboardViewIds(elementx.id_dashboard).then( (res) => {
-				res.forEach(elementy => {
-					console.log(elementy)
-					getView(elementy.id_view).then((res) => {
-						console.log(res);
-					}).catch( (err) => setImmediate(() => {throw err;}) );
-				});
-			}).catch( (err) => setImmediate(() => {throw err;}) );
-		});
-	}).catch( (err) => setImmediate(() => {throw err; }));
+	// getUserDashboardIds(1).then( (res) => {
+	// 	res.forEach(elementx => {
+	// 		console.log(elementx);
+	// 		getDashboardViewIds(elementx.id_dashboard).then( (res) => {
+	// 			res.forEach(elementy => {
+	// 				console.log(elementy)
+	// 				getView(elementy.id_view).then((res) => {
+	// 					console.log(res);
+	// 				}).catch( (err) => setImmediate(() => {throw err;}) );
+	// 			});
+	// 		}).catch( (err) => setImmediate(() => {throw err;}) );
+	// 	});
+	// }).catch( (err) => setImmediate(() => {throw err; }));
+
+	let newId = await createUser("testets", "hkjashkjsafbkj");
+	console.log(newId[0].id_user) ;
 
 }
 
-//test();
+// test();
 
 module.exports = {
   testConn,
@@ -179,5 +216,7 @@ module.exports = {
   createDashboard,
   getDashboardViewIds,
   getUserDashboardIds,
-  getView
+  getView,
+  createUser,
+  getUserByName
 }
