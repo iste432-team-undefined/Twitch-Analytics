@@ -5,7 +5,7 @@ const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
     database: 'twitch',
-    password: 'password',
+    password: 'admin',
     port: 5432,
   })
 
@@ -188,12 +188,12 @@ function getUserData(uid) {
 	const get_content_from_uid_query = {
 		name: 'user-get-content',
 		text: format("" +
-		"SELECT ud.id_user, d.*, json_agg(v) as views FROM user_dashboard ud " +
+		"SELECT d.*, json_agg(v) as views FROM user_dashboard ud " +
 		"INNER JOIN dashboard d on d.id_dashboard = ud.id_dashboard " +
 			"INNER JOIN dashboard_view dv on d.id_dashboard = dv.id_dashboard " +
 			"INNER JOIN view v on v.id_view = dv.id_view " +
 		"WHERE ud.id_user = $1 " +
-		"GROUP BY d.id_dashboard, ud.id_user"),
+		"GROUP BY d.id_dashboard"),
 		values: [uid],
 	}
 
@@ -220,9 +220,9 @@ async function test() {
 	// 	console.log(res[0]);
 	// }).catch( (err) => setImmediate(() => {throw err;}));
 
-	createDashboard("ahhhh",1).then( (res) => {
-		console.log(res.id_dashboard) ;
-	}).catch( (err) => setImmediate(() => {throw err; }));
+	// createDashboard("ahhhh",1).then( (res) => {
+	// 	console.log(res.id_dashboard) ;
+	// }).catch( (err) => setImmediate(() => {throw err; }));
 
 	// getDashboardName(3).then( (res) => {
 	// 	console.log(res[0]);
@@ -249,9 +249,9 @@ async function test() {
 	// let newId = await createUser("testets", "hkjashkjsafbkj");
 	// console.log(newId[0].id_user) ;
 
-	let data = await getUserContent(2);
-	console.log(data) ;
-	console.log(data[1].views);
+	// let data = await getUserData(2);
+	// console.log(data) ;
+	// console.log(data[1].views);
 }
 
 test();
@@ -266,5 +266,5 @@ module.exports = {
   getView,
   createUser,
   getUserByName,
-  getUserContent
+  getUserData
 }

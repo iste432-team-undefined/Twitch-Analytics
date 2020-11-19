@@ -1,8 +1,7 @@
 class User{
-    constructor(userID,username,password,dashboards){
+    constructor(userID,username,dashboards){
         this._userID = userID;
         this._username = username;
-        this._password = password;
         this._dashboards = dashboards;
     }
     //collection of dashboards
