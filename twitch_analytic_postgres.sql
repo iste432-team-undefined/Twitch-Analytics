@@ -6,7 +6,6 @@ CREATE TABLE "user" (
 	id_user SERIAL,
 	username VARCHAR(45),
 	password VARCHAR(50),
-	salt VARCHAR(25),
 	PRIMARY KEY(id_user)
 );
 
@@ -41,9 +40,9 @@ CREATE TABLE user_dashboard (
 	FOREIGN KEY (id_dashboard) REFERENCES dashboard (id_dashboard)
 );
 
-INSERT INTO "user" (username,password,salt) VALUES ('gamer_man1','testpwd','salthere');
-INSERT INTO "user" (username,password,salt) VALUES ('Xxx_gamer420_xxX','estpw','alhere');
-INSERT INTO "user" (username,password,salt) VALUES ('GgeZ','ttpd','sthere');
+INSERT INTO "user" (username,password) VALUES ('gamer_man1','testpwd');
+INSERT INTO "user" (username,password) VALUES ('Xxx_gamer420_xxX','estpw');
+INSERT INTO "user" (username,password) VALUES ('GgeZ','ttpd');
 
 INSERT INTO dashboard (title) VALUES ('StreamerName');
 INSERT INTO dashboard (title) VALUES ('GameName');

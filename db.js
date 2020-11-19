@@ -5,7 +5,7 @@ const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
     database: 'twitch',
-    password: 'admin',
+    password: 'password',
     port: 5432,
   })
 
@@ -113,21 +113,58 @@ function getDashboardViewIds(did) {
 }
 
 function createDashboard(name,ownerID){
+	let dashID;
 	const createDashQuery = {
 			name: 'make-dash',
-			text: format('INSERT INTO dashboard (title, owner_id) VALUES ($1,$2) RETURNING id_dashboard'),
-			values: [name,ownerID],
+			text: format('INSERT INTO dashboard (title) VALUES ($1) RETURNING id_dashboard'),
+			values: [name],
 		}
-
-	return new Promise( (resolve, reject) =>{
+	
+	new Promise( (resolve, reject) =>{
 		pool.query(createDashQuery, (err,result) => {
 			if (err) {
 				return reject(err);
 			}
-			return resolve(result.rows[0]);
+			dashID = resolve(result.rows[0]);
+			// createDashboardRelation(ownerID,dashID);
 		});
 	});
+
+	const createRelation = {
+		name: 'create-relation',
+		text: format('INSERT INTO user_dashboard (id_user, id_dashboard) VALUES ($1,$2)'),
+		values: [ownerID,dashID],
+	}
+
+	return new Promise((resolve, reject) =>{
+		pool.query(createRelation, (err,result) =>{
+			if(err) {
+				return reject(err);
+			}
+			return resolve (result.rows[0]);
+		});
+	});
+
+	
+
 }
+
+// function createDashboardRelation(ownerID,dashID){
+	// const createRelation = {
+	// 	name: 'create-relation',
+	// 	text: format('INSERT INTO user_dashboard (id_user,id_dashboard) VALUES ($1,$2)'),
+	// 	values: [ownerID,dashID],
+	// }
+
+// 	return new Promise ( (resolve, reject) =>{
+// 		pool.query(createRelation, (err,result) => {
+// 			if(err){
+// 				return reject(err);
+// 			}
+// 			return resolve(result.rows[0])
+// 		});
+// 	});
+// }
 
 async function test() {
 	// testConn().then( (res) => {
@@ -142,35 +179,35 @@ async function test() {
 	// 	console.log(res[0]);
 	// }).catch( (err) => setImmediate(() => {throw err;}));
 
-	// createDashboard("test",2).then( (res) => {
-	// 	console.log(res.id_dashboard) ;
-	// }).catch( (err) => setImmediate(() => {throw err; }));
+	createDashboard("ahhhh",1).then( (res) => {
+		console.log(res.id_dashboard) ;
+	}).catch( (err) => setImmediate(() => {throw err; }));
 
 	// getDashboardName(3).then( (res) => {
 	// 	console.log(res[0]);
 	// }).catch( (err) => setImmediate(() => {throw err;}));
 
-	getUser(1).then( (res) => {
-		console.log(res);
-	}).catch( (err) => setImmediate(() => {throw err; }));
+// 	getUser(1).then( (res) => {
+// 		console.log(res);
+// 	}).catch( (err) => setImmediate(() => {throw err; }));
 
-	getUserDashboardIds(1).then( (res) => {
-		res.forEach(elementx => {
-			console.log(elementx);
-			getDashboardViewIds(elementx.id_dashboard).then( (res) => {
-				res.forEach(elementy => {
-					console.log(elementy)
-					getView(elementy.id_view).then((res) => {
-						console.log(res);
-					}).catch( (err) => setImmediate(() => {throw err;}) );
-				});
-			}).catch( (err) => setImmediate(() => {throw err;}) );
-		});
-	}).catch( (err) => setImmediate(() => {throw err; }));
+// 	getUserDashboardIds(1).then( (res) => {
+// 		res.forEach(elementx => {
+// 			console.log(elementx);
+// 			getDashboardViewIds(elementx.id_dashboard).then( (res) => {
+// 				res.forEach(elementy => {
+// 					console.log(elementy)
+// 					getView(elementy.id_view).then((res) => {
+// 						console.log(res);
+// 					}).catch( (err) => setImmediate(() => {throw err;}) );
+// 				});
+// 			}).catch( (err) => setImmediate(() => {throw err;}) );
+// 		});
+// 	}).catch( (err) => setImmediate(() => {throw err; }));
 
 }
 
-//test();
+test();
 
 module.exports = {
   testConn,
