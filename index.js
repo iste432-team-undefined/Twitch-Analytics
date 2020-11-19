@@ -1,10 +1,16 @@
 const express = require('express') ;
 const twitch = require('./twitch_api') ;
 const DBconn = require('./db') ;
+const path = require('path') ;
 
 var token = "";
 
 const app = new express();
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "pug");
+app.use(express.static(path.join(__dirname, "public")));
+
 
 app.get('/', async function(req, res) {
     let twitch_user = await twitch.getTwitchUser(token, "shroud") ;
@@ -12,7 +18,8 @@ app.get('/', async function(req, res) {
 
     let response = JSON.stringify(twitch_user.data) + "<br/><br/>" + JSON.stringify(twitch_game.data) ;
 
-    res.send(response) ;
+    res.render("index", { title: "Home" , message: twitch_user.data});
+
 });
 
 app.listen(3000, async function() {

@@ -7,7 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "ui": "browser-sync start --config bs-config.js",
+    "dev": "nodemon ./index.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +25,12 @@
     "axios": "^0.21.0",
     "express": "^4.17.1",
     "mocha": "^8.2.1",
+    "nodemon": "^2.0.6",
     "pg": "^8.4.2",
-    "pg-format": "^1.0.4"
+    "pg-format": "^1.0.4",
+    "pug": "^3.0.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.13"
   }
 }
