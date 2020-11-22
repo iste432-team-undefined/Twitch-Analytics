@@ -206,6 +206,74 @@ return new Promise( (resolve, reject) =>{
 });
 }
 
+function addDashboardUserRelation(uid,did) {
+	const userQuery = {
+		name: 'add-dashboard',
+		text: format('INSERT INTO user_dashboard (id_user, id_dashboard) VALUES ($1, $2)'),
+		values:[uid,did],
+	}
+
+	return new Promise( (resolve, reject) => {
+		pool.query(userQuery, (err, result) => {
+			if (err) {
+				return reject(err);
+			}
+			return resolve(true);
+		});
+	});
+}
+
+function removeDashboardUserRelation(uid,did) {
+	const userQuery = {
+		name: 'remove-dashboard',
+		text: format('DELETE FROM user_dashboard WHERE id_user = $1 AND id_dashboard = $2'),
+		values:[uid,did],
+	}
+
+	return new Promise( (resolve, reject) => {
+		pool.query(userQuery, (err, result) => {
+			if (err) {
+				return reject(err);
+			}
+			return resolve(true);
+		});
+	});
+}
+
+function addViewDashboardRelation(did,vid) {
+	const userQuery = {
+		name: 'add-view',
+		text: format('INSERT INTO dashboard_view (id_dashboard, id_view) VALUES ($1, $2)'),
+		values:[did,vid],
+	}
+
+	return new Promise( (resolve, reject) => {
+		pool.query(userQuery, (err, result) => {
+			if (err) {
+				return reject(err);
+			}
+			return resolve(true);
+		});
+	});
+}
+
+function removeViewDashboardRelation(did,vid) {
+	const userQuery = {
+		name: 'remove-view',
+		text: format('DELETE FROM dashboard_view WHERE id_dashboard = $1 AND id_view = $2'),
+		values:[did,vid],
+	}
+
+	return new Promise( (resolve, reject) => {
+		pool.query(userQuery, (err, result) => {
+			if (err) {
+				return reject(err);
+			}
+			return resolve(true);
+		});
+	});
+}
+
 async function test() {
 	// testConn().then( (res) => {
 	// 	console.log(res[0]) ;
