@@ -27,7 +27,7 @@ app.get('/', async function(req, res) {
 app.post('/login', async function(req,res) {
     console.log(req.body);
     user = await loginUser(req.body.username, req.body.password)
-    if(user != null || user.userID > 0) {
+    if(user != null && user.userID > 0) {
         console.log("login sucess");
         // sucLogin;
         res.redirect('/home') ;
