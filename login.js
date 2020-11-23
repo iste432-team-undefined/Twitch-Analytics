@@ -15,6 +15,7 @@ function createNewUser(username, password) {
                 if(err) {
                     reject(err) ;
                 }
+                console.log(hash) ;
                 resolve(hash) ;
             });
         });
@@ -100,10 +101,10 @@ function buildUser(uid, username) {
 }
 
 async function test() { 
-    // let test_id = await createNewUser("test5","test1");
+    // let test_id = await createNewUser("test5","test");
     // console.log(test_id) ; 
 
-    let test_login = await loginUser("test5","test1")
+    let test_login = await loginUser("gamer_man1","test")
     console.log(test_login) ;
     console.log(test_login.dashboards[0].views) ;
 }
