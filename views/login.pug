@@ -1,0 +1,29 @@
+doctype html
+html(lang="en")
+
+
+  head
+
+    meta(charset="utf-8")
+    link(rel="shortcut icon", href="/favicon.ico")
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    meta(name="theme-color", content="#000000")
+    title #{title} | Twitch Stat Tracker
+    link(rel="stylesheet" href="css/login.css")
+    script(src='../login.js')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    style
+      include css/login.css
+
+    #main
+     form(id="login" action="/login" method='POST')
+       div.label login
+       div.username
+        input( name="username" type="text" placeholder="username" autofocus)
+       div.password
+        input(name="password" type="password" placeholder="password")
+
+       button(type="submit" ) login
+       p
+        | not a member?<br>
+        <a href="/login.pug">Sign Up Now!</a>
