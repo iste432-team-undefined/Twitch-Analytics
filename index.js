@@ -7,6 +7,7 @@ const { loginUser } = require('./login');
 const { compareSync } = require('bcrypt');
 const bodyParser = require('body-parser') ;
 
+
 var user = null;
 var token = "";
 
@@ -27,7 +28,7 @@ app.get('/', async function(req, res) {
 app.post('/login', async function(req,res) {
     console.log(req.body);
     user = await loginUser(req.body.username, req.body.password)
-    if(user != null || user.userID > 0) {
+    if(user != null && user.userID > 0) {
         console.log("login sucess");
         // sucLogin;
         res.redirect('/home') ;
@@ -44,12 +45,13 @@ app.get('/home', async function(req, res) {
 
     console.log(user) ;
 
-    let twitch_user = await twitch.getTwitchUser(token, "Zekeets") ;
-    let twitch_game = await twitch.getTwitchGame(token, "Escape From Tarkov") ;
+    //let twitch_user = await twitch.getTwitchUser(token, "Shroud") ;
+    //let twitch_game = await twitch.getTwitchGame(token, "Escape From Tarkov") ;
 
-    let response = JSON.stringify(twitch_user.data) + "<br/><br/>" + JSON.stringify(twitch_game.data) ;
+    //let response = JSON.stringify(twitch_user.data) + "<br/><br/>" + JSON.stringify(twitch_game.data) ;
 
-    res.render("index", { title: "Home" , message: twitch_user.data});
+    console.log(user.dashboards);
+    res.render("index", { title: "Home" , curUser: user , curDash: user.dashboards});
   });
 
 app.listen(3000, async function() {
