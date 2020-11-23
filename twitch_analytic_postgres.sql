@@ -43,10 +43,13 @@ CREATE TABLE user_dashboard (
 INSERT INTO "user" (username,password) VALUES ('gamer_man1','$2b$12$NMind992MBVAcbQqP6mZQOwxUAES5QDQxhs6KVZiV/JwNIFY4iOxO');
 INSERT INTO "user" (username,password) VALUES ('Xxx_gamer420_xxX','$2b$12$NMind992MBVAcbQqP6mZQOwxUAES5QDQxhs6KVZiV/JwNIFY4iOxO');
 INSERT INTO "user" (username,password) VALUES ('GgeZ','$2b$12$NMind992MBVAcbQqP6mZQOwxUAES5QDQxhs6KVZiV/JwNIFY4iOxO');
+INSERT INTO "user" (username,password) VALUES ('test','$2b$12$NMind992MBVAcbQqP6mZQOwxUAES5QDQxhs6KVZiV/JwNIFY4iOxO');
 
 INSERT INTO dashboard (title) VALUES ('gamer_man1 Dashboard');
 INSERT INTO dashboard (title) VALUES ('Xxx_gamer420_xxX Dashboard');
 INSERT INTO dashboard (title) VALUES ('GgeZ Dashboard');
+INSERT INTO dashboard (title) VALUES ('Variety Dashboard');
+INSERT INTO dashboard (title) VALUES ('Streamer Dashboard');
 
 INSERT INTO "view" (view_type,content_id) VALUES (1,37402112);
 INSERT INTO "view" (view_type,content_id) VALUES (2,491931);
@@ -69,6 +72,16 @@ INSERT INTO dashboard_view (id_dashboard,id_view) VALUES (3, 6);
 INSERT INTO dashboard_view (id_dashboard,id_view) VALUES (1, 7);
 INSERT INTO dashboard_view (id_dashboard,id_view) VALUES (2, 8);
 
+INSERT INTO dashboard_view (id_dashboard,id_view) VALUES (4,2);
+INSERT INTO dashboard_view (id_dashboard,id_view) VALUES(4,4);
+INSERT INTO dashboard_view (id_dashboard,id_view) VALUES(4,6);
+INSERT INTO dashboard_view (id_dashboard,id_view) VALUES(4,8);
+INSERT INTO dashboard_view (id_dashboard,id_view) VALUES(5,1);
+INSERT INTO dashboard_view (id_dashboard,id_view) VALUES(5,3);
+INSERT INTO dashboard_view (id_dashboard,id_view) VALUES(5,5);
+
 INSERT INTO user_dashboard (id_user, id_dashboard) VALUES (1,1);
 INSERT INTO user_dashboard (id_user, id_dashboard) VALUES (2,2);
 INSERT INTO user_dashboard (id_user, id_dashboard) VALUES (3,3);
+INSERT INTO user_dashboard (id_user,id_dashboard) VALUES (4,4);
+INSERT INTO user_dashboard (id_user,id_dashboard) VALUES (4,5);
