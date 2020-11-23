@@ -41,22 +41,30 @@ app.post('/login', async function(req,res) {
 app.post('/home', async function(req,res) {
     
     
-    console.log(gdashboard);
     if(req.body != null){
         userI = req.body.dashValue;
         console.log(user.dashboards[0].title);
-        for(var i = 0; i < user.dashboards; i++) {
+        for(var i = 0; i < user.dashboards.length; i++) {
             console.log(user.dashboards[i]);
             if(user.dashboards[i].title == userI){
                 gdashboard = user.dashboards[i];
             }
         }
 
+        console.log(gdashboard);
 
-        let twitch_user = "";
-        twitch_user = await twitch.getTwitchUserById(token, "37402112") ;
+        let twitch_user = null;
+        let datSet = [];
+        for(var i =0 ; i < gdashboard.views.length; i++){
+            if(gdashboard.views[i].viewID == 1){
+                twitch_user = await twitch.getTwitchUserById(token, gdashboard.views[i].viewType) ;
+            } else if(gdashboard.views[i].viewID == 2){
+                twitch_user = await twitch.getTwitchGameById(token, gdashboard.views[i].viewType) ;
+            }
+            datSet.push(twitch_user.data);
+        }
         //let response = JSON.stringify(twitch_user.data)
-        res.render("views", {title: "View", curUser: user, curView: user.dashboards, tData: twitch_user.data});
+        res.render("views", {title: "View", curUser: user, curView: datSet});
     } else {
         console.log("something went wrong");
         res.redirect('/') ;

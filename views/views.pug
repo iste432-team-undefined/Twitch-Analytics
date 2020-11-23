@@ -5,13 +5,12 @@ block layout-content
     h1.Banner TWITCH API
     include templates/header.pug
     div.intro
-        h1 Here is your #{title.dashID} views, #{curUser.username}.
+        h1 Here is your #{curView.dashID} views, #{curUser.username}.
     div.gridparent
-      each object in curView
-          each value in object.views
+        each entity in curView 
             div.card 
-              div.title
-                each dA in tData 
-                    h1 !{dA.display_name}
-                    h3 view count: !{dA.view_count}
-                    img(src=`${dA.profile_image_url}` alt='pfp' style="width:10vw;") 
+             div.title
+             each item in entity
+                h1 !{item.name}
+                h3 view count: !{item.view_count}
+                img(src=`${item.box_art_url}` alt='pfp' style="width:10vw;") 
