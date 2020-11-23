@@ -27,6 +27,40 @@ function testConn() {
   });
 }
 
+function createUser(username, password) {
+	const userQuery = {
+		name: 'create-user',
+		text: format('INSERT INTO "user" (username, password) VALUES($1, $2) RETURNING id_user'),
+		values:[username,password],
+	}
+
+	return new Promise( (resolve, reject) => {
+		pool.query(userQuery, (err, result) => {
+			if (err) {
+				return reject(-1);
+			}
+			return resolve(result.rows);
+		});
+	});
+}
+
+function getUserByName(username) {
+	const userQuery = {
+		name: 'get-username',
+		text: format('SELECT * FROM "user" WHERE username = $1'),
+		values:[username],
+	}
+
+	return new Promise( (resolve, reject) => {
+		pool.query(userQuery, (err, result) => {
+			if (err) {
+				return reject(err);
+			}
+			return resolve(result.rows[0]);
+		});
+	});
+}
+
 function getUser(id){
 	const userQuery = {
 		name: 'get-user',
@@ -149,22 +183,96 @@ function createDashboard(name,ownerID){
 
 }
 
-// function createDashboardRelation(ownerID,dashID){
-	// const createRelation = {
-	// 	name: 'create-relation',
-	// 	text: format('INSERT INTO user_dashboard (id_user,id_dashboard) VALUES ($1,$2)'),
-	// 	values: [ownerID,dashID],
-	// }
+function getUserData(uid) {
+	const get_content_from_uid_query = {
+		name: 'user-get-content',
+		text: format("" +
+		"SELECT d.*, json_agg(v) as views FROM user_dashboard ud " +
+		"INNER JOIN dashboard d on d.id_dashboard = ud.id_dashboard " +
+			"INNER JOIN dashboard_view dv on d.id_dashboard = dv.id_dashboard " +
+			"INNER JOIN view v on v.id_view = dv.id_view " +
+		"WHERE ud.id_user = $1 " +
+		"GROUP BY d.id_dashboard"),
+		values: [uid],
+	}
 
-// 	return new Promise ( (resolve, reject) =>{
-// 		pool.query(createRelation, (err,result) => {
-// 			if(err){
-// 				return reject(err);
-// 			}
-// 			return resolve(result.rows[0])
-// 		});
-// 	});
-// }
+return new Promise( (resolve, reject) =>{
+	pool.query(get_content_from_uid_query, (err,result) => {
+		if (err) {
+			return reject(err);
+		}
+		return resolve(result.rows);
+	});
+});
+}
+
+function addDashboardUserRelation(uid,did) {
+	const userQuery = {
+		name: 'add-dashboard',
+		text: format('INSERT INTO user_dashboard (id_user, id_dashboard) VALUES ($1, $2)'),
+		values:[uid,did],
+	}
+
+	return new Promise( (resolve, reject) => {
+		pool.query(userQuery, (err, result) => {
+			if (err) {
+				return reject(err);
+			}
+			return resolve(true);
+		});
+	});
+}
+
+function removeDashboardUserRelation(uid,did) {
+	const userQuery = {
+		name: 'remove-dashboard',
+		text: format('DELETE FROM user_dashboard WHERE id_user = $1 AND id_dashboard = $2'),
+		values:[uid,did],
+	}
+
+	return new Promise( (resolve, reject) => {
+		pool.query(userQuery, (err, result) => {
+			if (err) {
+				return reject(err);
+			}
+			return resolve(true);
+		});
+	});
+}
+
+function addViewDashboardRelation(did,vid) {
+	const userQuery = {
+		name: 'add-view',
+		text: format('INSERT INTO dashboard_view (id_dashboard, id_view) VALUES ($1, $2)'),
+		values:[did,vid],
+	}
+
+	return new Promise( (resolve, reject) => {
+		pool.query(userQuery, (err, result) => {
+			if (err) {
+				return reject(err);
+			}
+			return resolve(true);
+		});
+	});
+}
+
+function removeViewDashboardRelation(did,vid) {
+	const userQuery = {
+		name: 'remove-view',
+		text: format('DELETE FROM dashboard_view WHERE id_dashboard = $1 AND id_view = $2'),
+		values:[did,vid],
+	}
+
+	return new Promise( (resolve, reject) => {
+		pool.query(userQuery, (err, result) => {
+			if (err) {
+				return reject(err);
+			}
+			return resolve(true);
+		});
+	});
+}
 
 async function test() {
 	// testConn().then( (res) => {
@@ -179,35 +287,41 @@ async function test() {
 	// 	console.log(res[0]);
 	// }).catch( (err) => setImmediate(() => {throw err;}));
 
-	createDashboard("ahhhh",1).then( (res) => {
-		console.log(res.id_dashboard) ;
-	}).catch( (err) => setImmediate(() => {throw err; }));
+	// createDashboard("ahhhh",1).then( (res) => {
+	// 	console.log(res.id_dashboard) ;
+	// }).catch( (err) => setImmediate(() => {throw err; }));
 
 	// getDashboardName(3).then( (res) => {
 	// 	console.log(res[0]);
 	// }).catch( (err) => setImmediate(() => {throw err;}));
 
-// 	getUser(1).then( (res) => {
-// 		console.log(res);
-// 	}).catch( (err) => setImmediate(() => {throw err; }));
+	// getUser(1).then( (res) => {
+	// 	console.log(res);
+	// }).catch( (err) => setImmediate(() => {throw err; }));
 
-// 	getUserDashboardIds(1).then( (res) => {
-// 		res.forEach(elementx => {
-// 			console.log(elementx);
-// 			getDashboardViewIds(elementx.id_dashboard).then( (res) => {
-// 				res.forEach(elementy => {
-// 					console.log(elementy)
-// 					getView(elementy.id_view).then((res) => {
-// 						console.log(res);
-// 					}).catch( (err) => setImmediate(() => {throw err;}) );
-// 				});
-// 			}).catch( (err) => setImmediate(() => {throw err;}) );
-// 		});
-// 	}).catch( (err) => setImmediate(() => {throw err; }));
+	// getUserDashboardIds(1).then( (res) => {
+	// 	res.forEach(elementx => {
+	// 		console.log(elementx);
+	// 		getDashboardViewIds(elementx.id_dashboard).then( (res) => {
+	// 			res.forEach(elementy => {
+	// 				console.log(elementy)
+	// 				getView(elementy.id_view).then((res) => {
+	// 					console.log(res);
+	// 				}).catch( (err) => setImmediate(() => {throw err;}) );
+	// 			});
+	// 		}).catch( (err) => setImmediate(() => {throw err;}) );
+	// 	});
+	// }).catch( (err) => setImmediate(() => {throw err; }));
 
+	// let newId = await createUser("testets", "hkjashkjsafbkj");
+	// console.log(newId[0].id_user) ;
+
+	// let data = await getUserData(2);
+	// console.log(data) ;
+	// console.log(data[1].views);
 }
 
-test();
+// test();
 
 module.exports = {
   testConn,
@@ -216,5 +330,12 @@ module.exports = {
   createDashboard,
   getDashboardViewIds,
   getUserDashboardIds,
-  getView
+  getView,
+  createUser,
+  getUserByName,
+  getUserData,
+  addDashboardUserRelation,
+  addViewDashboardRelation,
+  removeDashboardUserRelation,
+  removeViewDashboardRelation
 }
