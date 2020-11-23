@@ -36,11 +36,10 @@ app.post('/login', async function(req,res) {
     }
 });
 
-// let sucLogin = app.get('/home', async function(req, res) {
 app.get('/home', async function(req, res) {
     console.log(user) ;
 
-    let twitch_user = await twitch.getTwitchUser(token, "shroud") ;
+    let twitch_user = await twitch.getTwitchUser(token, "Zekeets") ;
     let twitch_game = await twitch.getTwitchGame(token, "Escape From Tarkov") ;
 
     let response = JSON.stringify(twitch_user.data) + "<br/><br/>" + JSON.stringify(twitch_game.data) ;
