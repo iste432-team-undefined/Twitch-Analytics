@@ -1,6 +1,9 @@
 # Twitch Analytics
 Class project that utilizes the [Twitch API](https://dev.twitch.tv/docs/api) to provide users statistics on various streamers and categories
 
+## Project Github: 
+https://github.com/iste432-team-undefined/Twitch-Analytics 
+
 ## To Run:
 * Machine must have a postgres server running
 * Log into the server and create a database named "twitch"
@@ -11,7 +14,3 @@ Class project that utilizes the [Twitch API](https://dev.twitch.tv/docs/api) to 
 
 * If the program fails, one place to check is the top of the "db.js" file where the "Pool" object is created. Check to make sure the user, host, database, password, and port for this object are accurate with your install of postgres.
 * Try running "node ." in the project directory again.
-
-## TODO
-* Implement test classes using [MochaJS](https://mochajs.org/)
-* Continue working on final code to be delivered
