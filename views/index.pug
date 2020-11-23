@@ -8,9 +8,12 @@ block layout-content
       h1 Welcome #{curUser.username}
     div.gridparent
         each object in curDash 
-          form(id="dashNum" action="/home" method='POST')
-            div.card 
+          form(id="dashNum" action="/home" method='POST' )
+            div.card(onclick="clicked()")
               div.title
               h1 !{object.dashID}
               input(name="dashValue" type="hidden" value=`${object.title}`)
-              button(type="submit")
+  script.
+    function clicked() {
+      document.getElementById("dashNum").submit();
+    };
