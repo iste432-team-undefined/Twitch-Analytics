@@ -7,8 +7,10 @@ block layout-content
     div.intro
       h1 Welcome #{curUser.username}
     div.gridparent
-      each object in curDash 
-        a(href="/view#{object.title}")
-          div.card 
-            div.title
-            h1 !{object.dashID}
+        each object in curDash 
+          form(id="dashNum" action="/home" method='POST')
+            div.card 
+              div.title
+              h1 !{object.dashID}
+              input(name="dashValue" type="hidden" value=`${object.title}`)
+              button(type="submit")

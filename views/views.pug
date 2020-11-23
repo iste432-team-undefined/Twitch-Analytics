@@ -1,0 +1,14 @@
+extends layout
+
+block layout-content
+  div.View
+    h1.Banner TWITCH API
+    include templates/header.pug
+    div.intro
+      h1 Here is your #{curView} views, #{curUser.username}.
+    div.gridparent
+      each object in curView
+          each value in object.views
+            div.card 
+              div.title
+              h1 !{value.contentID}

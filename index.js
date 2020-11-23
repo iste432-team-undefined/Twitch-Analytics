@@ -9,6 +9,7 @@ const bodyParser = require('body-parser') ;
 
 
 var user = null;
+var dashboard = null;
 var token = "";
 
 const app = new express();
@@ -37,20 +38,31 @@ app.post('/login', async function(req,res) {
     }
 });
 
+//Returns the value of the dashboard clicked to query for views
+app.post('/home', async function(req,res) {
+    console.log(req.body);
+   // user = await loginUser(req.body.username, req.body.password)
+   console.log(user.dashboards);
+    if(user != null && user.userID > 0) {
+        res.render("views", {title: "View", curUser: user, curView: user.dashboards});
+    } else {
+        console.log("something went wrong");
+        res.redirect('/') ;
+    }
+});
+
 //Controls the portal authentication and redirection of the user for the home page.
 app.get('/home', async function(req, res) {
     if(user == null) {
         res.redirect('/') ;
     }
-
-
     res.render("index", { title: "Home" , curUser: user , curDash: user.dashboards});
   });
 
 
-
-//
-app.get('/views', async function(req, res) {
+/*
+//Sends correct display data based off the dashboard clicked. 
+app.get('/view', async function(req, res) {
     if(user == null) {
         res.redirect('/') ;
     }
@@ -58,7 +70,7 @@ app.get('/views', async function(req, res) {
     res.render("views", { title: "View" , curUser: user , curDash: user.dashboards});
 
 
-});
+});*/
 
 app.listen(3000, async function() {
     console.log(`Example app listening at http://localhost:3000/`);
