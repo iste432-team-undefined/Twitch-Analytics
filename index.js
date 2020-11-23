@@ -30,7 +30,6 @@ app.post('/login', async function(req,res) {
     user = await loginUser(req.body.username, req.body.password)
     if(user != null && user.userID > 0) {
         console.log("login sucess");
-        // sucLogin;
         res.redirect('/home') ;
     } else {
         console.log("login failure");
@@ -38,25 +37,19 @@ app.post('/login', async function(req,res) {
     }
 });
 
+//Controls the portal authentication and redirection of the user for the home page.
 app.get('/home', async function(req, res) {
     if(user == null) {
         res.redirect('/') ;
     }
 
-    //let twitch_user = await twitch.getTwitchUser(token, "Shroud") ;
-    //let twitch_game = await twitch.getTwitchGame(token, "Escape From Tarkov") ;
-
-    //let response = JSON.stringify(twitch_user.data) + "<br/><br/>" + JSON.stringify(twitch_game.data) ;
 
     res.render("index", { title: "Home" , curUser: user , curDash: user.dashboards});
   });
 
-app.listen(3000, async function() {
-    console.log(`Example app listening at http://localhost:3000/`);
-    token = await twitch.getToken() ; 
-});
 
 
+//
 app.get('/views', async function(req, res) {
     if(user == null) {
         res.redirect('/') ;
@@ -65,4 +58,9 @@ app.get('/views', async function(req, res) {
     res.render("views", { title: "View" , curUser: user , curDash: user.dashboards});
 
 
+});
+
+app.listen(3000, async function() {
+    console.log(`Example app listening at http://localhost:3000/`);
+    token = await twitch.getToken() ; 
 });

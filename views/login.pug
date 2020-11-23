@@ -1,27 +1,28 @@
 doctype html
 html(lang="en")
-
-
   head
-
     meta(charset="utf-8")
-    link(rel="icon", type="image/png" href="favicon.png")
+    link(rel="icon", type="image/png" href="./images/favicon.png")
     meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
     meta(name="theme-color", content="#000000")
-    title #{title} | Twitch Stat Tracker
+    title #{title} | Team Undefined Tracker
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     style
       include ../public/login.css
-
+    
+    div.icon
+      img(src='./images/twitch.png' alt='twitch' style='width:10vw;')
+      br
+      h1 Team Undefined Twitch Tracker
     #main
      form(id="login" action="/login" method='POST')
-       div.label login
+       div.description login
        div.username
         input( name="username" type="text" placeholder="username" autofocus)
        div.password
         input(name="password" type="password" placeholder="password")
-
+      
        button(type="submit" ) login
        p
         | Don't have an account?<br>
-        <a href="/register.pug">Sign Up Now!</a>
+        <a href="/register">Sign Up Now!</a>
