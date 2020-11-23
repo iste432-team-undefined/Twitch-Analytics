@@ -1,5 +1,5 @@
 class View{
-    constructor(viewType,contentID,viewID){
+    constructor(viewID,viewType,contentID){
         this._viewType = viewType;
         this._contentID = contentID;
         this._viewID = viewID;

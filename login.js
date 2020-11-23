@@ -15,7 +15,6 @@ function createNewUser(username, password) {
                 if(err) {
                     reject(err) ;
                 }
-                console.log(hash) ;
                 resolve(hash) ;
             });
         });

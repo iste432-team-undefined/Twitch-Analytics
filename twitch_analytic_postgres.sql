@@ -40,9 +40,9 @@ CREATE TABLE user_dashboard (
 	FOREIGN KEY (id_dashboard) REFERENCES dashboard (id_dashboard)
 );
 
-INSERT INTO "user" (username,password) VALUES ('gamer_man1','testpwd');
-INSERT INTO "user" (username,password) VALUES ('Xxx_gamer420_xxX','estpw');
-INSERT INTO "user" (username,password) VALUES ('GgeZ','ttpd');
+INSERT INTO "user" (username,password) VALUES ('gamer_man1','$2b$12$NMind992MBVAcbQqP6mZQOwxUAES5QDQxhs6KVZiV/JwNIFY4iOxO');
+INSERT INTO "user" (username,password) VALUES ('Xxx_gamer420_xxX','$2b$12$NMind992MBVAcbQqP6mZQOwxUAES5QDQxhs6KVZiV/JwNIFY4iOxO');
+INSERT INTO "user" (username,password) VALUES ('GgeZ','$2b$12$NMind992MBVAcbQqP6mZQOwxUAES5QDQxhs6KVZiV/JwNIFY4iOxO');
 
 INSERT INTO dashboard (title) VALUES ('gamer_man1 Dashboard');
 INSERT INTO dashboard (title) VALUES ('Xxx_gamer420_xxX Dashboard');
