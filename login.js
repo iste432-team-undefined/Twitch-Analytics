@@ -104,7 +104,7 @@ async function test() {
     // let test_id = await createNewUser("test5","test");
     // console.log(test_id) ; 
 
-    let test_login = await loginUser("gamer_man1","test")
+    let test_login = await loginUser("GgeZ","test")
     console.log(test_login) ;
     console.log(test_login.dashboards[0].views) ;
 }
