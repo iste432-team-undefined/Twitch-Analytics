@@ -16,12 +16,12 @@ html(lang="en")
       include css/login.css
 
     #main
-     form(action="/login" method='POST')
+     form(id="login" action="/login" method='POST')
        div.label login
        div.username
-        input(type="text" placeholder="username" , autofocus)
+        input( name="username" type="text" placeholder="username" autofocus)
        div.password
-        input(type="password" placeholder="password")
+        input(name="password" type="password" placeholder="password")
 
        button(type="submit" ) login
        p
