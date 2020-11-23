@@ -5,7 +5,9 @@ const path = require('path') ;
 const login = require('./login');
 const { loginUser } = require('./login');
 const { compareSync } = require('bcrypt');
+const bodyParser = require('body-parser') ;
 
+var user = null;
 var token = "";
 
 const app = new express();
@@ -13,6 +15,7 @@ const app = new express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 app.use(express.static(path.join(__dirname, "public")));
+app.use(bodyParser.urlencoded({extended:true})) ;
 
 
 app.get('/', async function(req, res) {
@@ -23,15 +26,20 @@ app.get('/', async function(req, res) {
 });
 app.post('/login', async function(req,res) {
     console.log(req.body);
-    if(loginUser(req.body.username, req.body.password) == true) {
+    user = await loginUser(req.body.username, req.body.password)
+    if(user != null || user.userID > 0) {
         console.log("login sucess");
-        sucLogin;
+        // sucLogin;
+        res.redirect('/home') ;
     } else {
         console.log("login failure");
     }
 });
 
-let sucLogin = app.get('/home', async function(req, res) {
+// let sucLogin = app.get('/home', async function(req, res) {
+app.get('/home', async function(req, res) {
+    console.log(user) ;
+
     let twitch_user = await twitch.getTwitchUser(token, "shroud") ;
     let twitch_game = await twitch.getTwitchGame(token, "Escape From Tarkov") ;
 
