@@ -3,14 +3,16 @@ extends layout
 block layout-content
   div.View
     h1.Banner TWITCH API
+    include templates/header.pug
     div.Message
       div.Title
         h3 Making the Best
         h1 TEST
       span.Details Access the Twitch_Tracker Team Portal
     div.NavButtons
-      a(href="/user")
+      
           div.NavButton Just dive in!
      
     each key in message   
       p !{key.id} !{key.login}
+

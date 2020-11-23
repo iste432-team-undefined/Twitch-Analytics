@@ -37,6 +37,7 @@ function createNewUser(username, password) {
     });
 }
 
+
 function loginUser(username, password) {
     let userCheck = null;
     return new Promise( async (resolve, reject) => {
