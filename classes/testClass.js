@@ -10,7 +10,7 @@ let view4 = new View(4,2,7512352);
 let view5 = new View(5,1,146582633);
 let view6 = new View(6,2,27471);
 let view7 = new View(7,1,110690086);
-let view8 = new View(8,2,516575)
+let view8 = new View(8,2,516575);
 
 // Test view sets
 let viewSet = new Set();
@@ -34,7 +34,7 @@ let dash1 = new Dashboard(1,'gamer_man1 Dashboard',viewSet);
 let dash2 = new Dashboard(2, 'Xxx_gamer420_xxX Dashboard',setView);
 let dash3 = new Dashboard(3,'GgeZ Dashboard',finalSet)
 
-dash3.addView(view7);
+// dash3.addView(view7);
 
 let dashSet = new Set;
 dashSet.add(dash1);
@@ -47,7 +47,8 @@ console.log("UserID: "+testUser.userID);
 console.log("Username: "+testUser.username);
 console.log(testUser.dashboards);
 console.log(' ');
-dash2.addView(view8);
+dash2.removeView(view5)
+dash2.addView(view5);
 
 // JSON Example of user object
 console.log('JSON Output Example');
