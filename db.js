@@ -333,5 +333,9 @@ module.exports = {
   getView,
   createUser,
   getUserByName,
-  getUserData
+  getUserData,
+  addDashboardUserRelation,
+  removeDashboardUserRelation,
+  addViewDashboardRelation,
+  removeViewDashboardRelation
 }
