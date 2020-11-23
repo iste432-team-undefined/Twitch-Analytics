@@ -4,6 +4,7 @@ const DBconn = require('./db') ;
 const path = require('path') ;
 const login = require('./login');
 const { loginUser } = require('./login');
+const { compareSync } = require('bcrypt');
 
 var token = "";
 
@@ -21,7 +22,8 @@ app.get('/', async function(req, res) {
 
 });
 app.post('/login', async function(req,res) {
-    if(loginUser() == true) {
+    console.log(req.body);
+    if(loginUser(req.body.username, req.body.password) == true) {
         console.log("login sucess");
         sucLogin;
     } else {
