@@ -4,15 +4,24 @@ block layout-content
   div.View
     h1.Banner TWITCH API
     include templates/header.pug
-    div.Message
-      div.Title
-        h3 Making the Best
-        h1 TEST
-      span.Details Access the Twitch_Tracker Team Portal
-    div.NavButtons
-      
-          div.NavButton Just dive in!
-     
-    each key in message   
-      p !{key.id} !{key.login}
+    div.intro
+      h1 Welcome #{curUser.username}
+    div.gridparent
+      div.card
+        div.Title
+          h1 My Waifus
+      div.card
+        div.Title
+          h1 TIM THE TATMAN
+
+      div.card
+        div.Title
+          h1 POKIMANE
+      div.card
+        div.Title
+          h1 TEST
+      each object in curDash   
+        div.card 
+          div.title
+          h1 !{object.dashID}
 

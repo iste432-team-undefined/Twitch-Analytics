@@ -19,6 +19,7 @@ body,
 }
 
 body {
+  background: linear-gradient( rgba(15,15,15,1) 0%, rgba(0,0,0,1) 100%);
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -29,12 +30,18 @@ body {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
+.gridparent{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 30% 30% 30%; 
+}
+
 h1,
 h2,
 h3 {
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
-
+  font-size: 1vw;
   padding: 0;
   margin: 0;
 
@@ -42,7 +49,7 @@ h3 {
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 2vw;
 }
 
 a {
@@ -52,87 +59,62 @@ a {
   user-select: none;
 }
 
-#root {
-  display: flex;
-  flex-direction: column;
+.intro{
+    display: flex;
+    justify-content: center;
+}
+.intro h1 {
+    color: antiquewhite
 }
 
-.View {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-
-  height: 100%;
-  width: 100%;
-
-  padding: 20px;
-
-  background-size: cover;
-
-  font-family: "Merriweather Sans", sans-serif;
+span {
+    font-size: 1vw;
 }
-
 .Banner {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  width: 100%;
-
-  border-radius: 5px;
-
+    
+  width: 80vw;
+  border-radius: 30px;
   overflow: hidden;
   background: white;
-  padding: 15px;
-
+  padding: 3vh;
+  margin-top: 1%;
+  margin-bottom: 2%;
+  margin-left: 10%;
+  margin-right: 10%;
   font-family: "Share Tech Mono", monospace;
 
   border-bottom: var(--ui-shadow-border);
   box-shadow: var(--ui-shadow);
 }
 
-.Message {
+.Banner h1{
+    font-size: 300%;
+}
+
+p{
+    color: cyan;
+}
+
+
+.card {
   background: white;
-  padding: 30px;
+  margin-top: 90%;
+  padding: 1vw;
+  padding-bottom: 12%;
+  padding-top: 8%;
+  margin: 1vw;
+  overflow: hidden;
+  border-radius: 5px;
   border-bottom: var(--ui-shadow-border);
   box-shadow: var(--ui-shadow);
 }
 
-.Message > .Title {
-  padding-bottom: 20px;
+.card:hover{
+  background: mediumpurple;
+  transition: all .4s ease;
 }
 
-.Message > .Details {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.5em;
-}
-
-.NavButtons {
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0 20px;
-}
-
-.NavButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 55px;
-  width: 150px;
-
-  background: #fa4141;
-
-  border-radius: 30px;
-
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
-
-  text-transform: capitalize;

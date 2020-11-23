@@ -7,6 +7,7 @@ const { loginUser } = require('./login');
 const { compareSync } = require('bcrypt');
 const bodyParser = require('body-parser') ;
 
+
 var user = null;
 var token = "";
 
@@ -37,7 +38,6 @@ app.post('/login', async function(req,res) {
     }
 });
 
-// let sucLogin = app.get('/home', async function(req, res) {
 app.get('/home', async function(req, res) {
     if(user == null) {
         res.redirect('/') ;
@@ -45,12 +45,13 @@ app.get('/home', async function(req, res) {
 
     console.log(user) ;
 
-    let twitch_user = await twitch.getTwitchUser(token, "shroud") ;
-    let twitch_game = await twitch.getTwitchGame(token, "Escape From Tarkov") ;
+    //let twitch_user = await twitch.getTwitchUser(token, "Shroud") ;
+    //let twitch_game = await twitch.getTwitchGame(token, "Escape From Tarkov") ;
 
-    let response = JSON.stringify(twitch_user.data) + "<br/><br/>" + JSON.stringify(twitch_game.data) ;
+    //let response = JSON.stringify(twitch_user.data) + "<br/><br/>" + JSON.stringify(twitch_game.data) ;
 
-    res.render("index", { title: "Home" , message: twitch_user.data});
+    console.log(user.dashboards);
+    res.render("index", { title: "Home" , curUser: user , curDash: user.dashboards});
   });
 
 app.listen(3000, async function() {
