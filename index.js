@@ -33,10 +33,15 @@ app.post('/login', async function(req,res) {
         res.redirect('/home') ;
     } else {
         console.log("login failure");
+        res.redirect('/') ;
     }
 });
 
 app.get('/home', async function(req, res) {
+    if(user == null) {
+        res.redirect('/') ;
+    }
+
     console.log(user) ;
 
     let twitch_user = await twitch.getTwitchUser(token, "Zekeets") ;
