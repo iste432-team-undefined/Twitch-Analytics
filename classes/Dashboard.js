@@ -20,20 +20,14 @@ class Dashboard{
     }
 
     async addView(viewObj){
-        let addView;
-        Database.addDashboardUserRelation(this._dashID,viewObj.viewID).then( (res) => {
-	 	    addView = res[0];
-	    }).catch( (err) => setImmediate(() => {throw err;}));
+        let addView = await Database.addViewDashboardRelation(this._dashID,viewObj.viewID);
         if(addView){
             this.views.add(viewObj);
         }
     }
 
     async removeView(viewObj){
-        let removeView;
-        Database.removeViewDashboardRelation(this._dashID,viewObj.viewID).then( (res) =>{
-            removeView = res[0];
-        }).catch( (err) => setImmediate(() => {throw err;}));
+        let removeView = await  Database.removeViewDashboardRelation(this._dashID,viewObj.viewID);
         if(removeView){
             this.views.delete(viewObj);
         }

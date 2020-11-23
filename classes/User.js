@@ -21,20 +21,14 @@ class User{
     }
 
     async addDashboard(dashboardObj){
-        let addDash;
-        Database.addDashboardUserRelation(this._userID,dashboardObj.dashID).then( (res) =>{
-            addDash = res[0];
-        }).catch( (err) => setImmediate(() => {throw err;}));
+        let addDash = await Database.addDashboardUserRelation(this._userID,dashboardObj.dashID);
         if(addDash){
             this._dashboards.add(dashboardObj);
         }
     }
 
     async removeDashboard(dashboardObj){
-        let removeDash;
-        Database.removeDashboardUserRelation(this._userID,dashboardObj.dashID).then( (res) =>{
-            removeDash = res[0];
-        }).catch( (err) => setImmediate(() => {throw err;}));
+        let removeDash = await Database.removeDashboardUserRelation(this._userID,dashboardObj.dashID);
         if(removeDash){
             this._dashboards.delete(dashboardObj);
         }
