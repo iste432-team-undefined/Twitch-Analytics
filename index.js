@@ -43,15 +43,12 @@ app.post('/home', async function(req,res) {
     
     if(req.body != null){
         userI = req.body.dashValue;
-        console.log(user.dashboards[0].title);
-        for(var i = 0; i < user.dashboards.length; i++) {
-            console.log(user.dashboards[i]);
+        console.log(userI);
+        for(var i = 0; i < user.dashboards.length; i++) {;
             if(user.dashboards[i].title == userI){
                 gdashboard = user.dashboards[i];
             }
         }
-
-        console.log(gdashboard);
 
         let twitch_user = null;
         let datSet = [];
