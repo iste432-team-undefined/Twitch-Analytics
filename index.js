@@ -43,18 +43,26 @@ app.get('/home', async function(req, res) {
         res.redirect('/') ;
     }
 
-    console.log(user) ;
-
     //let twitch_user = await twitch.getTwitchUser(token, "Shroud") ;
     //let twitch_game = await twitch.getTwitchGame(token, "Escape From Tarkov") ;
 
     //let response = JSON.stringify(twitch_user.data) + "<br/><br/>" + JSON.stringify(twitch_game.data) ;
 
-    console.log(user.dashboards);
     res.render("index", { title: "Home" , curUser: user , curDash: user.dashboards});
   });
 
 app.listen(3000, async function() {
     console.log(`Example app listening at http://localhost:3000/`);
     token = await twitch.getToken() ; 
+});
+
+
+app.get('/views', async function(req, res) {
+    if(user == null) {
+        res.redirect('/') ;
+    }
+
+    res.render("views", { title: "View" , curUser: user , curDash: user.dashboards});
+
+
 });
