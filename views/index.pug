@@ -7,21 +7,8 @@ block layout-content
     div.intro
       h1 Welcome #{curUser.username}
     div.gridparent
-      div.card
-        div.Title
-          h1 My Waifus
-      div.card
-        div.Title
-          h1 TIM THE TATMAN
-
-      div.card
-        div.Title
-          h1 POKIMANE
-      div.card
-        div.Title
-          h1 TEST
-      each object in curDash   
-        div.card 
-          div.title
-          h1 !{object.dashID}
-
+      each object in curDash 
+        a(href="/view#{object.title}")
+          div.card 
+            div.title
+            h1 !{object.dashID}
