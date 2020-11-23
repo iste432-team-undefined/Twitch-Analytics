@@ -9,9 +9,8 @@ const bodyParser = require('body-parser') ;
 
 
 var user = null;
-var dashboard = null;
+var gdashboard;
 var token = "";
-
 const app = new express();
 
 app.set("views", path.join(__dirname, "views"));
@@ -30,7 +29,7 @@ app.post('/login', async function(req,res) {
     console.log(req.body);
     user = await loginUser(req.body.username, req.body.password)
     if(user != null && user.userID > 0) {
-        console.log("login sucess");
+        console.log("login success");
         res.redirect('/home') ;
     } else {
         console.log("login failure");
@@ -40,11 +39,24 @@ app.post('/login', async function(req,res) {
 
 //Returns the value of the dashboard clicked to query for views
 app.post('/home', async function(req,res) {
-    console.log(req.body);
-   // user = await loginUser(req.body.username, req.body.password)
-   console.log(user.dashboards);
-    if(user != null && user.userID > 0) {
-        res.render("views", {title: "View", curUser: user, curView: user.dashboards});
+    
+    
+    console.log(gdashboard);
+    if(req.body != null){
+        userI = req.body.dashValue;
+        console.log(user.dashboards[0].title);
+        for(var i = 0; i < user.dashboards; i++) {
+            console.log(user.dashboards[i]);
+            if(user.dashboards[i].title == userI){
+                gdashboard = user.dashboards[i];
+            }
+        }
+
+
+        let twitch_user = "";
+        twitch_user = await twitch.getTwitchUserById(token, "37402112") ;
+        //let response = JSON.stringify(twitch_user.data)
+        res.render("views", {title: "View", curUser: user, curView: user.dashboards, tData: twitch_user.data});
     } else {
         console.log("something went wrong");
         res.redirect('/') ;
